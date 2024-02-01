@@ -35,6 +35,25 @@ app.post("/students", async (req, res) => {
     }
 })
 
+
+// Read the data of the registered students.
+app.get("/students", async (req, res) => {
+
+    try {
+        const studentsData = await Student.find();
+        res.send(studentsData);
+    } catch (e) {
+        res.send(e);
+    }
+})
+
+// get the individual student data using id
+
+
+
+
+
+
 app.listen(port, () => {
     console.log(`connected successfully at port ${port}`);
 })
