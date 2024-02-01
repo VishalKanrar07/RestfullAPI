@@ -59,6 +59,41 @@ app.get("/students/:id", async (req, res) => {
     }
 })
 
+// get the individual student data using name
+app.get("/students/name/:name", async (req, res) => {
+    try {
+        const name = req.params.name;
+        console.log(req.params.name);
+        const studentData1 = await Student.findOne({ name: name });
+
+        if (!studentData1) {
+            // If no student with the given name is found
+            return res.status(404).send('Student not found');
+        } else {
+            res.send(studentData1);
+        }
+    } catch (e) {
+        res.status(500).send(e.message);
+    }
+});
+
+// get the individual student data using email
+app.get("/students/email/:email", async (req, res) => {
+    try {
+        const email = req.params.email;
+        console.log(req.params.email);
+        const studentData2 = await Student.findOne({ email: email });
+
+        if (!studentData2) {
+            // If no student with the given name is found
+            return res.status(404).send('Student not found');
+        } else {
+            res.send(studentData2);
+        }
+    } catch (e) {
+        res.status(500).send(e.message);
+    }
+});
 
 app.listen(port, () => {
     console.log(`connected successfully at port ${port}`);
