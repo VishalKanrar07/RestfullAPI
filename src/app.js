@@ -48,10 +48,16 @@ app.get("/students", async (req, res) => {
 })
 
 // get the individual student data using id
+app.get("/students/:id", async (req, res) => {
 
-
-
-
+    try {
+        const _id = req.params.id;
+        const studentData = await Student.findById(_id);
+        res.send(studentData);
+    } catch (e) {
+        res.send(e);
+    }
+})
 
 
 app.listen(port, () => {
