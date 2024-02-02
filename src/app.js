@@ -95,6 +95,25 @@ app.get("/students/email/:email", async (req, res) => {
     }
 });
 
+// update the students by its id
+
+app.patch("/students/:id", async (req, res) => {
+    try {
+        const _id = req.params.id;
+        const updatestudentdata = await Student.findByIdAndUpdate(_id, req.body, {
+            new: true // this will directly update without sending send button twice
+        });
+        res.send(updatestudentdata);
+    } catch (e) {
+        res.status(404).send(e);
+    }
+})
+
+
+
+
+
+
 app.listen(port, () => {
     console.log(`connected successfully at port ${port}`);
 })
