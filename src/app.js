@@ -109,7 +109,20 @@ app.patch("/students/:id", async (req, res) => {
     }
 })
 
+// delete the students by its id
 
+app.delete("/students/:id", async (req, res) => {
+    try {
+        const id = req.params.id;
+        const deletestudentdata = await Student.findByIdAndDelete(id);
+        if (!req.params.id) {
+            return req.status(404).send();
+        }
+        res.send(deletestudentdata);
+    } catch (e) {
+        res.status(500).send(e);
+    }
+})
 
 
 
